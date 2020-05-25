@@ -1,0 +1,35 @@
+#include<stdio.h>
+int i,index[100],j;
+char str[100];
+void change(char* ch)       //only for characters to switch case
+{
+    if(*ch>=65&&*ch<=90)      //is capital
+        *ch=*ch+32;             //make small
+    else
+        *ch=*ch-32;             //make capital
+
+}
+void show(int k)
+{
+    if(k==j)
+    {
+        printf("%s,",str);
+        change(&str[index[j]]);
+        printf("%s,",str);
+    }
+    else
+    {
+        show(k+1);
+        change(&str[index[k]]);
+        show(k+1);
+    }
+}
+void main()
+{
+    printf("Enter a string ");
+    scanf("%s",&str);
+    for(i=0,j=-1;str[i]!='\0';i++)
+        if((str[i]>64&&str[i]<91)||(str[i]>96&&str[i]<123)) // it is a alphabet
+            index[++j]=i;     //j+1=number of alphabets. index is array to store index of alphabets
+    show(0);
+}
